@@ -80,7 +80,7 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaOpcoes, ITela
             int quantidade = Convert.ToInt32(Console.ReadLine());
 
 
-            return new RequisicaoSaida(paciente, medicamento, quantidade);
+            return new RequisicaoSaida(medicamento, quantidade, paciente);
         }
     }
 

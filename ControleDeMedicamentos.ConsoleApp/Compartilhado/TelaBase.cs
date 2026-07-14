@@ -116,7 +116,7 @@ public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
 
         if (ExisteRegistroComInformacoesExclusivas(entidadeAtualizada, idSelecionado))
         {
-            Console.WriteLine("Digite ENTER para continuar");
+            Console.WriteLine("Pressione ENTER para continuar");
             Console.ReadLine();
 
             Editar();
@@ -128,7 +128,7 @@ public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
         Console.WriteLine("---------------------------------");
         Console.WriteLine($"O registro \"{entidadeAtualizada.Id}\" foi editado com sucesso!");
         Console.WriteLine("---------------------------------");
-        Console.WriteLine("Digite ENTER para continuar");
+        Console.WriteLine("Pressione ENTER para continuar");
         Console.ReadLine();
     }
 
@@ -147,7 +147,7 @@ public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
 
         if (ExistemDependenciasAtivasDoRegistro(idSelecionado))
         {
-            Console.WriteLine("Digite ENTER para continuar");
+            Console.WriteLine("Presione ENTER para continuar");
             Console.ReadLine();
             return;
         }
@@ -157,7 +157,7 @@ public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
         Console.WriteLine("---------------------------------");
         Console.WriteLine($"O registro \"{idSelecionado}\" foi excluído com sucesso!");
         Console.WriteLine("---------------------------------");
-        Console.WriteLine("Digite ENTER para continuar");
+        Console.WriteLine("Pressione ENTER para continuar");
         Console.ReadLine();
     }
 

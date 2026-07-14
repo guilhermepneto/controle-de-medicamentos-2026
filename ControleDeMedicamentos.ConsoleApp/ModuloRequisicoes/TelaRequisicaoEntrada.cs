@@ -43,7 +43,7 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaOpcoes, I
         if (deveExibirCabecalho)
         {
             Console.WriteLine("---------------------------------");
-            Console.Write("Digite ENTER para continuar...");
+            Console.Write("Pressione ENTER para continuar...");
             Console.ReadLine();
         }
     }
