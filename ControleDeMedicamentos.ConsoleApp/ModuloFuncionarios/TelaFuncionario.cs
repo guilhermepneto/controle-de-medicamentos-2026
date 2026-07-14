@@ -19,7 +19,7 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaOpcoes, ITelaCrud
         }
 
         Console.WriteLine(
-            "{0,-5} | {1,-30} | {2,-15} | {4,-11}",
+            "{0,-5} | {1,-30} | {2,-15} | {3,-11}",
             "Id", "Nome", "Telefone", "CPF"
         );
 
@@ -28,7 +28,7 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaOpcoes, ITelaCrud
         foreach (Funcionario f in registros)
         {
             Console.WriteLine(
-               "{0,-5} | {1,-30} | {2,-15} | {4,-11}",
+               "{0,-5} | {1,-30} | {2,-15} | {3,-11}",
                f.Id,
                f.Nome,
                f.Telefone,

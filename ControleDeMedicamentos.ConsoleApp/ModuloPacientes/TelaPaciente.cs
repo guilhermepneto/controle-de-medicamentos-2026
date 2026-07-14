@@ -56,7 +56,7 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaOpcoes, ITelaCrud
         Console.Write("Digite o número do cartão do SUS: ");
         string cartaoSus = Console.ReadLine() ?? string.Empty;
 
-        Console.Write("Informe o  do paciente: ");
+        Console.Write("Informe o CPF do paciente: ");
         string Cpf = Console.ReadLine() ?? string.Empty;
 
         return new Paciente(nome, telefone, cartaoSus, Cpf);

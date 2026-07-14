@@ -36,7 +36,7 @@ public class TelaFornecedor : TelaBase<Fornecedor>, ITelaOpcoes, ITelaCrud
         if (deveExibirCabecalho)
         {
             Console.WriteLine("---------------------------------");
-            Console.Write("Digite ENTER para continuar...");
+            Console.Write("Pressione ENTER para continuar...");
             Console.ReadLine();
         }
     }
