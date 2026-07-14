@@ -12,6 +12,7 @@ public class TelaPrincipal
     private readonly TelaFornecedor telaFornecedor;
     private readonly TelaMedicamento telaMedicamento;
     private readonly TelaRequisicaoEntrada telaRequisicaoEntrada;
+    private readonly TelaRequisicaoSaida telaRequisicaoSaida;
     private readonly TelaPaciente telaPaciente;
     private readonly TelaFuncionario telaFuncionario;
 
@@ -20,12 +21,14 @@ public class TelaPrincipal
         RepositorioFornecedorEmArquivo repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
         RepositorioMedicamentoEmArquivo repositorioMedicamento = new RepositorioMedicamentoEmArquivo(contexto);
         RepositorioRequisicaoEntradaEmArquivo repositorioRequisicao = new RepositorioRequisicaoEntradaEmArquivo(contexto);
+        RepositorioRequisicaoSaidaEmArquivo repositorioRequisicaoSaida = new RepositorioRequisicaoSaidaEmArquivo(contexto);
         RepositorioPacienteEmArquivo repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
         RepositorioFuncionarioEmArquivo repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contexto);
 
         telaFornecedor = new TelaFornecedor(repositorioFornecedor);
         telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
         telaRequisicaoEntrada = new TelaRequisicaoEntrada(repositorioRequisicao, repositorioMedicamento);
+        telaRequisicaoSaida = new TelaRequisicaoSaida(repositorioRequisicaoSaida, repositorioMedicamento, repositorioPaciente);
         telaPaciente = new TelaPaciente(repositorioPaciente);
         telaFuncionario = new TelaFuncionario(repositorioFuncionario);
     }
@@ -64,7 +67,7 @@ public class TelaPrincipal
             return telaRequisicaoEntrada;
 
         if (opcaoMenuPrincipal == "6")
-            return null;
+            return telaRequisicaoSaida;
 
         return null;
     }
