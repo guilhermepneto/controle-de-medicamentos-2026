@@ -41,18 +41,21 @@ public class TelaFornecedor : TelaBase<Fornecedor>, ITelaOpcoes, ITelaCrud
         }
     }
 
-    protected override Fornecedor ObterDadosCadastrais()
+    protected override Fornecedor ObterDadosCadastrais
     {
-        Console.Write("Digite o nome do fornecedor: ");
-        string nome = Console.ReadLine() ?? string.Empty;
+        get
+        {
+            Console.Write("Digite o nome do fornecedor: ");
+            string nome = Console.ReadLine() ?? string.Empty;
 
-        Console.Write("Digite o telefone do fornecedor: ");
-        string telefone = Console.ReadLine() ?? string.Empty;
+            Console.Write("Digite o telefone do fornecedor: ");
+            string telefone = Console.ReadLine() ?? string.Empty;
 
-        Console.Write("Digite o CNPJ do fornecedor: ");
-        string cnpj = Console.ReadLine() ?? string.Empty;
+            Console.Write("Digite o CNPJ do fornecedor: ");
+            string cnpj = Console.ReadLine() ?? string.Empty;
 
-        return new Fornecedor(nome, telefone, cnpj);
+            return new Fornecedor(nome, telefone, cnpj);
+        }
     }
 
     protected override bool ExisteRegistroComInformacoesExclusivas(Fornecedor entidade, int? idIgnorado = null)

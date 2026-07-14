@@ -37,7 +37,7 @@ public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
         Console.WriteLine($"Cadastro de {nomeEntidade}");
         Console.WriteLine("---------------------------------");
 
-        TEntidade novaEntidade = ObterDadosCadastrais();
+        TEntidade novaEntidade = ObterDadosCadastrais;
 
         List<string> erros = novaEntidade.Validar();
 
@@ -92,7 +92,7 @@ public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
 
         Console.WriteLine("---------------------------------");
 
-        TEntidade entidadeAtualizada = ObterDadosCadastrais();
+        TEntidade entidadeAtualizada = ObterDadosCadastrais;
 
         List<string> erros = entidadeAtualizada.Validar();
 
@@ -163,7 +163,7 @@ public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
 
     public abstract void VisualizarTodos(bool deveExibirCabecalho);
 
-    protected abstract TEntidade ObterDadosCadastrais();
+    protected abstract TEntidade ObterDadosCadastrais { get; }
 
     protected virtual bool ExisteRegistroComInformacoesExclusivas(TEntidade entidade, int? idIgnorado = null)
     {

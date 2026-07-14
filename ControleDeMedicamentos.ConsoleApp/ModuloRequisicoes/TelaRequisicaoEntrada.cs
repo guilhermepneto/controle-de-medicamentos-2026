@@ -48,21 +48,24 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaOpcoes, I
         }
     }
 
-    protected override RequisicaoEntrada ObterDadosCadastrais()
+    protected override RequisicaoEntrada ObterDadosCadastrais
     {
-        VisualizarMedicamentos();
+        get
+        {
+            VisualizarMedicamentos();
 
-        Console.WriteLine("---------------------------------");
+            Console.WriteLine("---------------------------------");
 
-        Console.Write("Digite o ID do medicamento que deseja requisitar: ");
-        int idMedicamento = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Digite o ID do medicamento que deseja requisitar: ");
+            int idMedicamento = Convert.ToInt32(Console.ReadLine());
 
-        Medicamento medicamento = repositorioMedicamento.SelecionarPorId(idMedicamento)!;
+            Medicamento medicamento = repositorioMedicamento.SelecionarPorId(idMedicamento)!;
 
-        Console.Write("Digite a quantidade que deseja requisitar: ");
-        int quantidade = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Digite a quantidade que deseja requisitar: ");
+            int quantidade = Convert.ToInt32(Console.ReadLine());
 
-        return new RequisicaoEntrada(medicamento, quantidade);
+            return new RequisicaoEntrada(medicamento, quantidade);
+        }
     }
 
     private void VisualizarMedicamentos()

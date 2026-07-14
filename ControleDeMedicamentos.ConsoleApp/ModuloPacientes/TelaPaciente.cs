@@ -45,21 +45,24 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaOpcoes, ITelaCrud
         }
     }
 
-    protected override Paciente ObterDadosCadastrais()
+    protected override Paciente ObterDadosCadastrais
     {
-        Console.Write("Digite o nome do paciente: ");
-        string nome = Console.ReadLine() ?? string.Empty;
+        get
+        {
+            Console.Write("Digite o nome do paciente: ");
+            string nome = Console.ReadLine() ?? string.Empty;
 
-        Console.Write("Digite o telefone do paciente: ");
-        string telefone = Console.ReadLine() ?? string.Empty;
+            Console.Write("Digite o telefone do paciente: ");
+            string telefone = Console.ReadLine() ?? string.Empty;
 
-        Console.Write("Digite o número do cartão do SUS: ");
-        string cartaoSus = Console.ReadLine() ?? string.Empty;
+            Console.Write("Digite o número do cartão do SUS: ");
+            string cartaoSus = Console.ReadLine() ?? string.Empty;
 
-        Console.Write("Informe o CPF do paciente: ");
-        string Cpf = Console.ReadLine() ?? string.Empty;
+            Console.Write("Informe o CPF do paciente: ");
+            string Cpf = Console.ReadLine() ?? string.Empty;
 
-        return new Paciente(nome, telefone, cartaoSus, Cpf);
+            return new Paciente(nome, telefone, cartaoSus, Cpf);
+        }
     }
 
     protected override bool ExisteRegistroComInformacoesExclusivas(Paciente entidade, int? idIgnorado = null)

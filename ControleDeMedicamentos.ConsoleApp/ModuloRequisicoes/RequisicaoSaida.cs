@@ -23,6 +23,13 @@ public class RequisicaoSaida : EntidadeBase
         medicamento.RegistrarRequisicaoSaida(this);
     }
 
+    public RequisicaoSaida(Paciente paciente, Medicamento medicamento, int quantidade)
+    {
+        Paciente = paciente;
+        Medicamento = medicamento;
+        Quantidade = quantidade;
+    }
+
     public override List<string> Validar()
     {
         List<string> erros = [];
