@@ -3,7 +3,7 @@ using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloPacientes;
 
-public class Paciente : EntidadeBase<Paciente>
+public class Paciente : EntidadeBase
 {
     public string Nome { get; set; } = string.Empty;
     public string Telefone { get; set; } = string.Empty;
@@ -41,8 +41,10 @@ public class Paciente : EntidadeBase<Paciente>
         return erros;
     }
 
-    public override void Atualizar(Paciente pacienteAtualizado)
+    public override void Atualizar(EntidadeBase entidadeAtualizada)
     {
+        Paciente pacienteAtualizado = (Paciente)entidadeAtualizada;
+
         Nome = pacienteAtualizado.Nome;
         Telefone = pacienteAtualizado.Telefone;
         CartaoSus = pacienteAtualizado.CartaoSus;
