@@ -1,4 +1,3 @@
-using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.Compartilhado.Arquivos;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedores;

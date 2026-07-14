@@ -1,19 +1,19 @@
 using System.Text.RegularExpressions;
 using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 
-namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionarios;
+namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 
-public class Funcionarios : EntidadeBase
+public class Funcionario : EntidadeBase
 {
     public string Nome { get; set; } = string.Empty;
     public string Telefone { get; set; } = string.Empty;
     public string Cpf { get; set; } = string.Empty;
 
-    public Funcionarios()
+    public Funcionario()
     {
     }
 
-    public Funcionarios(string nome, string telefone, string cpf) : this()
+    public Funcionario(string nome, string telefone, string cpf) : this()
     {
         Nome = nome;
         Telefone = telefone;
@@ -38,10 +38,10 @@ public class Funcionarios : EntidadeBase
 
     public override void Atualizar(EntidadeBase entidadeAtualizada)
     {
-        Funcionarios funcionariosAtualizado = (Funcionarios)entidadeAtualizada;
+        Funcionario funcionarioAtualizado = (Funcionario)entidadeAtualizada;
 
-        Nome = funcionariosAtualizado.Nome;
-        Telefone = funcionariosAtualizado.Telefone;
-        Cpf = funcionariosAtualizado.Cpf;
+        Nome = funcionarioAtualizado.Nome;
+        Telefone = funcionarioAtualizado.Telefone;
+        Cpf = funcionarioAtualizado.Cpf;
     }
 }

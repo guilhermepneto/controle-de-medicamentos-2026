@@ -10,6 +10,6 @@ public class RepositorioPacienteEmArquivo : RepositorioBaseEmArquivo<Paciente>
 
     protected override List<Paciente> ObterRegistros()
     {
-        return contexto.Pacientes;
+        return contexto.Paciente;
     }
 }
