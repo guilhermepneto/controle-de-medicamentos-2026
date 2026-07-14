@@ -2,7 +2,7 @@
 
 ## Projeto
 
-Desenvolvido durante o curso Backend da [Academia do Programador](https://www.academiadoprogramador.net) 2026
+Desenvolvido durante o curso Backend da [Academia do Programador](https://www.academiadoprogramador.net) 2026, como projeto final do módulo 2: Orientação à Objetos.
 
 ## Funcionalidades
 
