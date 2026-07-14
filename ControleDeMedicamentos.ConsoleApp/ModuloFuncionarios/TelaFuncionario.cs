@@ -5,8 +5,6 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionarios;
 
 public class TelaFuncionario : TelaBase<Funcionario>, ITelaOpcoes, ITelaCrud
 {
-    private readonly RepositorioFuncionarioEmArquivo repositorioFuncionario;
-
     public TelaFuncionario(RepositorioFuncionarioEmArquivo repositorio) : base("Funcionario", repositorio)
     {
     }

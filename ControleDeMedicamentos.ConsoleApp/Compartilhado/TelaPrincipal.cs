@@ -41,6 +41,7 @@ public class TelaPrincipal
         Console.WriteLine("3 - Gestão de Pacientes");
         Console.WriteLine("4 - Gestão de Funcionários");
         Console.WriteLine("5 - Gestão de Requisições de Entrada");
+        Console.WriteLine("6 - Gestão de Requisições de Saída");
         Console.WriteLine("S - Sair");
         Console.WriteLine("---------------------------------");
         Console.Write("> ");
@@ -61,6 +62,9 @@ public class TelaPrincipal
 
         if (opcaoMenuPrincipal == "5")
             return telaRequisicaoEntrada;
+
+        if (opcaoMenuPrincipal == "6")
+            return null;
 
         return null;
     }
