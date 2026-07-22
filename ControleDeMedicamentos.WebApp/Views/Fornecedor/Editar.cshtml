@@ -1,0 +1,37 @@
+@using ControleDeMedicamentos.WebApp.ModuloFornecedores
+
+@model Fornecedor;
+
+<h2>Controle de Medicamentos</h2>
+
+<hr />
+<a href="/">Inicio</a> /
+<a href="/Fornecedor/Listar">Fornecedores</a> /
+<hr />
+
+<h1>Edição de Fornecedor</h1>
+
+<form action="/Fornecedor/Editar/@Model.Id" method="post">
+
+    <div>
+        <label for="nome">Nome</label>
+        <input id="nome" name="Nome" type="text" value="@Model.Nome">
+    </div>
+
+    <div>
+        <label for="telefone">Telefone</label>
+        <input id="telefone" name="telefone" type="text" value="@Model.Telefone">
+    </div>
+
+    <div>
+        <label for="cnpj">CNPJ</label>
+        <input id="cnpj" name="cnpj" type="text" value="@Model.Cnpj">
+    </div>
+
+    <button type="submit">Confirmar edição</button>
+
+</form>
+
+<p>
+    <a href="Listar">Voltar para a Lista</a>
+</p>
