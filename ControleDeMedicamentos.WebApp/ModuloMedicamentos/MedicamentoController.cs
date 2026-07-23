@@ -51,4 +51,37 @@ public sealed class MedicamentoController : Controller
 
         return RedirectToAction(nameof(Listar));
     }
+
+    [HttpGet]
+    public ActionResult Editar(int id)
+    {
+        Medicamento? medicamento = repositorioMedicamento.SelecionarPorId(id);
+
+        if (medicamento == null)
+            return NotFound();
+
+        List<Fornecedor> fornecedores = repositorioFornecedor.SelecionarTodos();
+
+        ViewBag.Fornecedores = fornecedores;
+
+        return View(medicamento);
+    }
+
+    [HttpPost]
+    public ActionResult Editar(int id, string nome, string descricao, int fornecedorId)
+    {
+        Fornecedor? fornecedor = repositorioFornecedor.SelecionarPorId(fornecedorId);
+
+        if (fornecedor == null)
+            return NotFound();
+
+        Medicamento medicamentoAtualizado = new Medicamento(nome, descricao, fornecedor);
+
+        bool conseguiuEditar = repositorioMedicamento.Editar(id, medicamentoAtualizado);
+
+        if (!conseguiuEditar)
+            return NotFound();
+
+        return RedirectToAction(nameof(Listar));
+    }
 }
