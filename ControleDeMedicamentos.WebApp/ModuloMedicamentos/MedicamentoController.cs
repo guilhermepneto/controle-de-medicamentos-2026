@@ -30,7 +30,11 @@ public sealed class MedicamentoController : Controller
     [HttpGet]
     public ActionResult Cadastrar()
     {
-        return View();
+        List<Fornecedor> fornecedores = repositorioFornecedor.SelecionarTodos();
+
+        ViewBag.Fornecedores = fornecedores;
+
+        return View(fornecedores);
     }
 
     [HttpPost]
