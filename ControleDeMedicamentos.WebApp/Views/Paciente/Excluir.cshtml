@@ -1,0 +1,25 @@
+@using ControleDeMedicamentos.WebApp.ModuloPacientes
+
+@model Paciente;
+
+<h2>Controle de Medicamentos</h2>
+
+<hr />
+<a href="/">Inicio</a> /
+<a href="/Paciente/Listar">Pacientes</a> /
+<hr />
+
+<h1>Exclusão de Paciente</h1>
+
+<form action="/Paciente/Excluir/@Model.Id" method="post">
+
+    <p>Você deseja excluir o registro "@Model.Nome"? Não é possível reverter.
+    </p>
+
+    <button type="submit">Confirmar</button>
+
+</form>
+
+<p>
+    <a href="Listar">Voltar para a Lista</a>
+</p>
