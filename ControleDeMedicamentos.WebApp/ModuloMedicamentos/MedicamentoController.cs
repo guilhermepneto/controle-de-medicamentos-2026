@@ -84,4 +84,27 @@ public sealed class MedicamentoController : Controller
 
         return RedirectToAction(nameof(Listar));
     }
+
+    [HttpGet]
+    public ActionResult Excluir(int id)
+    {
+        Medicamento? medicamento = repositorioMedicamento.SelecionarPorId(id);
+
+        if (medicamento == null)
+            return NotFound();
+
+        return View(medicamento);
+    }
+
+    [HttpPost]
+    [ActionName("Excluir")]
+    public ActionResult ConfirmarExclusao(int id)
+    {
+        bool conseguiuExcluir = repositorioMedicamento.Excluir(id);
+
+        if (!conseguiuExcluir)
+            return NotFound();
+
+        return RedirectToAction(nameof(Listar));
+    }
 }

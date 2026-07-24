@@ -1,17 +1,19 @@
 @using ControleDeMedicamentos.WebApp.ModuloFornecedores
+@using ControleDeMedicamentos.WebApp.ModuloMedicamentos
 
-@model Fornecedor;
+@model Medicamento;
 
 <h2>Controle de Medicamentos</h2>
 
 <hr />
 <a href="/">Inicio</a> /
 <a href="/Fornecedor/Listar">Fornecedores</a> /
+<a href="/Medicamento/Listar">Medicamentos</a> /
 <hr />
 
-<h1>Exclusão de Fornecedor</h1>
+<h1>Exclusão de Medicamentos</h1>
 
-<form action="/Fornecedor/Excluir/@Model.Id" method="post">
+<form action="/Medicamento/Excluir/@Model.Id" method="post">
 
     <p>Você deseja excluir o registro "@Model.Nome"? Não é possível reverter.
     </p>
@@ -21,5 +23,5 @@
 </form>
 
 <p>
-    <a href="Listar">Voltar para a Lista</a>
+    <a href="/Medicamento/Listar">Voltar para a Lista</a>
 </p>
