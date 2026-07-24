@@ -9,11 +9,11 @@ public sealed class FornecedorController : Controller
 
     public FornecedorController()
     {
-        ContextoJson contextoJson = new ContextoJson();
+        ContextoJson contexto = new ContextoJson();
 
-        contextoJson.Carregar();
+        contexto.Carregar();
 
-        repositorio = new RepositorioFornecedorEmArquivo(contextoJson);
+        repositorio = new RepositorioFornecedorEmArquivo(contexto);
     }
 
     [HttpGet]

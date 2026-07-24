@@ -1,6 +1,6 @@
-@using ControleDeMedicamentos.WebApp.ModuloFornecedores
+@using ControleDeMedicamentos.WebApp.ModuloFuncionario
 
-@model List<Fornecedor>
+@model List<Funcionario>
 
 <h2>Controle de Medicamentos</h2>
 
@@ -13,10 +13,10 @@
 
 <hr />
 
-<h1>Listagem de Fornecedores</h1>
+<h1>Listagem de Funcionarios</h1>
 
 <p>
-    <a href="Cadastrar">Cadastrar Fornecedor</a>
+    <a href="Cadastrar">Cadastrar Funcionarios</a>
 </p>
 
 <table>
@@ -26,18 +26,18 @@
         <th>Id</th>
         <th>Nome</th>
         <th>Telefone</th>
-        <th>CNPJ</th>
+        <th>CPF</th>
         <th>Ações</th>
     </thead>
 
     <tbody>
-        @foreach (Fornecedor f in Model)
+        @foreach (Funcionario f in Model)
         {
             <tr>
                 <td>@f.Id</td>
                 <td>@f.Nome</td>
                 <td>@f.Telefone</td>
-                <td>@f.Cnpj</td>
+                <td>@f.Cpf</td>
                 <td>
                     <a href="Editar/@f.Id">Editar</a>
                     <span> | <span>
