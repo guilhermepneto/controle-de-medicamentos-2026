@@ -5,7 +5,7 @@ namespace ControleDeMedicamentos.WebApp.ModuloPacientes;
 
 public sealed class PacienteController : Controller
 {
-    private readonly RepositorioPacienteEmArquivo repositorio;
+    private readonly RepositorioPacienteEmArquivo repositorioPaciente;
 
     public PacienteController()
     {
@@ -13,13 +13,13 @@ public sealed class PacienteController : Controller
 
         contexto.Carregar();
 
-        repositorio = new RepositorioPacienteEmArquivo(contexto);
+        repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
     }
 
     [HttpGet]
     public ActionResult Listar()
     {
-        List<Paciente> pacientes = repositorio.SelecionarTodos();
+        List<Paciente> pacientes = repositorioPaciente.SelecionarTodos();
 
         return View(pacientes);
     }
@@ -35,10 +35,36 @@ public sealed class PacienteController : Controller
     {
         Paciente paciente = new Paciente(nome, telefone, cartaoSus, cpf);
 
-        repositorio.Cadastrar(paciente);
+        repositorioPaciente.Cadastrar(paciente);
 
         return RedirectToAction(nameof(Listar));
 
+    }
+
+    [HttpGet]
+    public ActionResult Editar(int id)
+    {
+        Paciente? paciente = repositorioPaciente.SelecionarPorId(id);
+
+        if (paciente == null)
+            return NotFound();
+
+        return View(paciente);
+    }
+
+    [HttpPost]
+    public ActionResult Editar(int id, string nome, string telefone, string cartaoSus, string cpf)
+    {
+        Paciente? paciente = repositorioPaciente.SelecionarPorId(id);
+
+        Paciente pacienteAtualizado = new Paciente(nome, telefone, cartaoSus, cpf);
+
+        bool conseguiuEditar = repositorioPaciente.Editar(id, pacienteAtualizado);
+
+        if (!conseguiuEditar)
+            return NotFound();
+
+        return RedirectToAction(nameof(Listar));
     }
 
 }
