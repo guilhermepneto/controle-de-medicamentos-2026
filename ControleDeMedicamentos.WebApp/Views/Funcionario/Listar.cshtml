@@ -1,6 +1,4 @@
-@using ControleDeMedicamentos.WebApp.ModuloFuncionario
-
-@model List<Funcionario>
+@model List<ListarFuncionarioViewModel>
 
 <h2>Controle de Medicamentos</h2>
 
@@ -26,18 +24,16 @@
         <th>Id</th>
         <th>Nome</th>
         <th>Telefone</th>
-        <th>CPF</th>
         <th>Ações</th>
     </thead>
 
     <tbody>
-        @foreach (Funcionario f in Model)
+        @foreach (ListarFuncionarioViewModel f in Model)
         {
             <tr>
                 <td>@f.Id</td>
                 <td>@f.Nome</td>
                 <td>@f.Telefone</td>
-                <td>@f.Cpf</td>
                 <td>
                     <a href="Editar/@f.Id">Editar</a>
                     <span> | <span>

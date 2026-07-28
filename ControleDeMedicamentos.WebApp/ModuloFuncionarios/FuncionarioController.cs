@@ -23,7 +23,20 @@ public sealed class FuncionarioController : Controller
     {
         List<Funcionario> funcionarios = repositorioFuncionario.SelecionarTodos();
 
-        return View(funcionarios);
+        List<ListarFuncionarioViewModel> viewModels = new List<ListarFuncionarioViewModel>();
+
+        foreach (Funcionario f in funcionarios)
+        {
+            ListarFuncionarioViewModel vm = new ListarFuncionarioViewModel(
+                f.Id,
+                f.Nome,
+                f.Telefone
+            );
+
+            viewModels.Add(vm);
+        }
+
+        return View(viewModels);
     }
 
     public ActionResult Cadastrar()
@@ -34,9 +47,13 @@ public sealed class FuncionarioController : Controller
     }
 
     [HttpPost]
-    public ActionResult Cadastrar(string nome, string telefone, string cpf)
+    public ActionResult Cadastrar(CadastrarFuncionarioViewModel cadastrarVm)
     {
-        Funcionario funcionario = new Funcionario(nome, telefone, cpf);
+        Funcionario funcionario = new Funcionario(
+            cadastrarVm.Nome,
+            cadastrarVm.Telefone,
+            cadastrarVm.Cpf
+            );
 
         repositorioFuncionario.Cadastrar(funcionario);
 
