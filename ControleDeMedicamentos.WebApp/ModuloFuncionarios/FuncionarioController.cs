@@ -68,17 +68,27 @@ public sealed class FuncionarioController : Controller
         if (funcionario == null)
             return NotFound();
 
-        return View(funcionario);
+        EditarFuncionarioViewModel viewModel = new EditarFuncionarioViewModel(
+          id,
+          funcionario.Nome,
+          funcionario.Telefone,
+          funcionario.Cpf
+        );
+
+        return View(viewModel);
     }
 
     [HttpPost]
-    public ActionResult Editar(int id, string nome, string telefone, string cpf)
+    public ActionResult Editar(EditarFuncionarioViewModel editarVm)
     {
-        Funcionario? funcionario = repositorioFuncionario.SelecionarPorId(id);
 
-        Funcionario funcionarioAtualizado = new Funcionario(nome, telefone, cpf);
+        Funcionario funcionarioAtualizado = new Funcionario(
+            editarVm.Nome,
+            editarVm.Telefone,
+            editarVm.Cpf
+            );
 
-        bool conseguiuEditar = repositorioFuncionario.Editar(id, funcionarioAtualizado);
+        bool conseguiuEditar = repositorioFuncionario.Editar(editarVm.Id, funcionarioAtualizado);
 
         if (!conseguiuEditar)
             return NotFound();
