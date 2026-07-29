@@ -39,6 +39,7 @@ public sealed class FuncionarioController : Controller
         return View(viewModels);
     }
 
+    [HttpGet]
     public ActionResult Cadastrar()
     {
         return View();

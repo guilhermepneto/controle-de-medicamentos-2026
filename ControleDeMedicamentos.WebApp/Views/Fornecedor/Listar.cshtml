@@ -1,4 +1,4 @@
-@model List<Fornecedor>
+@model List<ListarFornecedorViewModel>
 
 <h2>Controle de Medicamentos</h2>
 
@@ -14,7 +14,7 @@
 <h1>Listagem de Fornecedores</h1>
 
 <p>
-    <a href="Cadastrar">Cadastrar Fornecedor</a>
+    <a href="Cadastrar">Cadastrar Fornecedores</a>
 </p>
 
 <table>
@@ -24,12 +24,12 @@
         <th>Id</th>
         <th>Nome</th>
         <th>Telefone</th>
-        <th>CNPJ</th>
+        <th>Cnpj</th>
         <th>Ações</th>
     </thead>
 
     <tbody>
-        @foreach (Fornecedor f in Model)
+        @foreach (ListarFornecedorViewModel f in Model)
         {
             <tr>
                 <td>@f.Id</td>
@@ -38,10 +38,10 @@
                 <td>@f.Cnpj</td>
                 <td>
                     <a href="Editar/@f.Id">Editar</a>
-                    <span> | <span>
-                        <a href="Excluir/@f.Id">Excluir</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                    <span> | </span>
+                    <a href="Excluir/@f.Id">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

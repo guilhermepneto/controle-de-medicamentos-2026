@@ -1,27 +1,41 @@
+namespace ControleDeMedicamentos.WebApp.ModuloFornecedores;
+
 using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ControleDeMedicamentos.WebApp.ModuloFornecedores;
-
 public sealed class FornecedorController : Controller
 {
-    private readonly RepositorioFornecedorEmArquivo repositorio;
+    private readonly RepositorioFornecedorEmArquivo repositorioFornecedor;
 
     public FornecedorController()
     {
-        ContextoJson contexto = new ContextoJson();
+        ContextoJson contextoJson = new ContextoJson();
 
-        contexto.Carregar();
+        contextoJson.Carregar();
 
-        repositorio = new RepositorioFornecedorEmArquivo(contexto);
+        repositorioFornecedor = new RepositorioFornecedorEmArquivo(contextoJson);
     }
 
     [HttpGet]
     public ActionResult Listar()
     {
-        List<Fornecedor> fornecedores = repositorio.SelecionarTodos();
+        List<Fornecedor> fornecedores = repositorioFornecedor.SelecionarTodos();
 
-        return View(fornecedores);
+        List<ListarFornecedorViewModel> viewModels = new List<ListarFornecedorViewModel>();
+
+        foreach (Fornecedor f in fornecedores)
+        {
+            ListarFornecedorViewModel vm = new ListarFornecedorViewModel(
+                f.Id,
+                f.Nome,
+                f.Telefone,
+                f.Cnpj
+            );
+
+            viewModels.Add(vm);
+        }
+
+        return View(viewModels);
     }
 
     [HttpGet]
@@ -31,11 +45,16 @@ public sealed class FornecedorController : Controller
     }
 
     [HttpPost]
-    public ActionResult Cadastrar(string nome, string telefone, string cnpj)
+    public ActionResult Cadastrar(CadastrarFornecedorViewModel cadastrarVm)
     {
-        Fornecedor fornecedor = new Fornecedor(nome, telefone, cnpj);
+        Fornecedor fornecedor = new Fornecedor(
+            cadastrarVm.Nome,
+            cadastrarVm.Telefone,
+            cadastrarVm.Cnpj
+            );
 
-        repositorio.Cadastrar(fornecedor);
+        repositorioFornecedor.Cadastrar(fornecedor);
+
 
         return RedirectToAction(nameof(Listar));
     }
@@ -43,22 +62,31 @@ public sealed class FornecedorController : Controller
     [HttpGet]
     public ActionResult Editar(int id)
     {
-        Fornecedor? fornecedor = repositorio.SelecionarPorId(id);
+        Fornecedor? fornecedor = repositorioFornecedor.SelecionarPorId(id);
 
         if (fornecedor == null)
             return NotFound();
 
-        return View(fornecedor);
+        EditarFornecedorViewModel viewModel = new EditarFornecedorViewModel(
+          id,
+          fornecedor.Nome,
+          fornecedor.Telefone,
+          fornecedor.Cnpj
+        );
+
+        return View(viewModel);
     }
 
     [HttpPost]
-    public ActionResult Editar(int id, string nome, string telefone, string cnpj)
+    public ActionResult Editar(EditarFornecedorViewModel editarVm)
     {
-        Fornecedor? fornecedor = repositorio.SelecionarPorId(id);
+        Fornecedor fornecedorAtualizado = new Fornecedor(
+            editarVm.Nome,
+            editarVm.Telefone,
+            editarVm.Cnpj
+            );
 
-        Fornecedor fornecedorAtualizado = new Fornecedor(nome, telefone, cnpj);
-
-        bool conseguiuEditar = repositorio.Editar(id, fornecedorAtualizado);
+        bool conseguiuEditar = repositorioFornecedor.Editar(editarVm.Id, fornecedorAtualizado);
 
         if (!conseguiuEditar)
             return NotFound();
@@ -69,25 +97,29 @@ public sealed class FornecedorController : Controller
     [HttpGet]
     public ActionResult Excluir(int id)
     {
-        Fornecedor? fornecedor = repositorio.SelecionarPorId(id);
+        Fornecedor? fornecedor = repositorioFornecedor.SelecionarPorId(id);
 
         if (fornecedor == null)
             return NotFound();
 
-        return View(fornecedor);
+        ExcluirFornecedorViewModel viewModel = new ExcluirFornecedorViewModel(
+            id,
+            fornecedor.Nome
+        );
+
+        return View(viewModel);
     }
 
     [HttpPost]
     [ActionName("Excluir")]
-    public ActionResult ConfirmarExclusao(int id)
+    public ActionResult ConfirmarExclusao(ExcluirFornecedorViewModel excluirVm)
     {
-        Fornecedor? fornecedor = repositorio.SelecionarPorId(id);
-
-        bool conseguiuExcluir = repositorio.Excluir(id);
+        bool conseguiuExcluir = repositorioFornecedor.Excluir(excluirVm.Id);
 
         if (!conseguiuExcluir)
             return NotFound();
 
         return RedirectToAction(nameof(Listar));
     }
+
 }
