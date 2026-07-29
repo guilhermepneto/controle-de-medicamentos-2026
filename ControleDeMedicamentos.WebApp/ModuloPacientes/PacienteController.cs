@@ -9,11 +9,11 @@ public sealed class PacienteController : Controller
 
     public PacienteController()
     {
-        ContextoJson contexto = new ContextoJson();
+        ContextoJson contextoJson = new ContextoJson();
 
-        contexto.Carregar();
+        contextoJson.Carregar();
 
-        repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
+        repositorioPaciente = new RepositorioPacienteEmArquivo(contextoJson);
     }
 
     [HttpGet]
@@ -21,7 +21,21 @@ public sealed class PacienteController : Controller
     {
         List<Paciente> pacientes = repositorioPaciente.SelecionarTodos();
 
-        return View(pacientes);
+        List<ListarPacienteViewModel> viewModels = new List<ListarPacienteViewModel>();
+
+        foreach (Paciente p in pacientes)
+        {
+            ListarPacienteViewModel vm = new ListarPacienteViewModel(
+                p.Id,
+                p.Nome,
+                p.Telefone,
+                p.CartaoSus
+            );
+
+            viewModels.Add(vm);
+        }
+
+        return View(viewModels);
     }
 
     [HttpGet]
@@ -31,9 +45,14 @@ public sealed class PacienteController : Controller
     }
 
     [HttpPost]
-    public ActionResult Cadastrar(string nome, string telefone, string cartaoSus, string cpf)
+    public ActionResult Cadastrar(CadastrarPacienteViewModel cadastrarVm)
     {
-        Paciente paciente = new Paciente(nome, telefone, cartaoSus, cpf);
+        Paciente paciente = new Paciente(
+            cadastrarVm.Nome,
+            cadastrarVm.Telefone,
+            cadastrarVm.CartaoSus,
+            cadastrarVm.Cpf
+            );
 
         repositorioPaciente.Cadastrar(paciente);
 
@@ -49,17 +68,28 @@ public sealed class PacienteController : Controller
         if (paciente == null)
             return NotFound();
 
-        return View(paciente);
+        EditarPacienteViewModel viewModel = new EditarPacienteViewModel(
+          id,
+          paciente.Nome,
+          paciente.Telefone,
+          paciente.CartaoSus,
+          paciente.Cpf
+        );
+
+        return View(viewModel);
     }
 
     [HttpPost]
-    public ActionResult Editar(int id, string nome, string telefone, string cartaoSus, string cpf)
+    public ActionResult Editar(EditarPacienteViewModel editarVm)
     {
-        Paciente? paciente = repositorioPaciente.SelecionarPorId(id);
+        Paciente pacienteAtualizado = new Paciente(
+            editarVm.Nome,
+            editarVm.Telefone,
+            editarVm.CartaoSus,
+            editarVm.Cpf
+            );
 
-        Paciente pacienteAtualizado = new Paciente(nome, telefone, cartaoSus, cpf);
-
-        bool conseguiuEditar = repositorioPaciente.Editar(id, pacienteAtualizado);
+        bool conseguiuEditar = repositorioPaciente.Editar(editarVm.Id, pacienteAtualizado);
 
         if (!conseguiuEditar)
             return NotFound();
@@ -75,16 +105,18 @@ public sealed class PacienteController : Controller
         if (paciente == null)
             return NotFound();
 
-        return View(paciente);
+        ExcluirPacienteViewModel viewModel = new ExcluirPacienteViewModel(
+            id,
+            paciente.Nome
+        );
+
+        return View(viewModel);
     }
 
     [HttpPost]
-    [ActionName("Excluir")]
-    public ActionResult ConfirmarExclusao(int id)
+    public ActionResult Excluir(ExcluirPacienteViewModel excluirVm)
     {
-        Paciente? paciente = repositorioPaciente.SelecionarPorId(id);
-
-        bool conseguiuExcluir = repositorioPaciente.Excluir(id);
+        bool conseguiuExcluir = repositorioPaciente.Excluir(excluirVm.Id);
 
         if (!conseguiuExcluir)
             return NotFound();

@@ -111,8 +111,7 @@ public sealed class FornecedorController : Controller
     }
 
     [HttpPost]
-    [ActionName("Excluir")]
-    public ActionResult ConfirmarExclusao(ExcluirFornecedorViewModel excluirVm)
+    public ActionResult Excluir(ExcluirFornecedorViewModel excluirVm)
     {
         bool conseguiuExcluir = repositorioFornecedor.Excluir(excluirVm.Id);
 

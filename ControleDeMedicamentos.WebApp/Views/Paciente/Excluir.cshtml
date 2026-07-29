@@ -1,23 +1,30 @@
-@model Paciente;
+@model ExcluirPacienteViewModel;
 
 <h2>Controle de Medicamentos</h2>
 
 <hr />
-<a href="/">Inicio</a> /
-<a href="/Paciente/Listar">Pacientes</a> /
+<a asp-controller="Home" asp-action="Index">Início</a> / @* Âncora ou Link *@
+<a asp-controller="Fornecedor" asp-action="Listar">Fornecedores</a> / @* Âncora ou Link *@
+<a asp-controller="Medicamento" asp-action="Listar">Medicamentos</a> / @* Âncora ou Link *@
+<a asp-controller="Funcionario" asp-action="Listar">Funcionários</a> / @* Âncora ou Link *@
 <hr />
 
-<h1>Exclusão de Paciente</h1>
+<h1>Exclusão de Pacientes</h1>
 
-<form action="/Paciente/Excluir/@Model.Id" method="post">
+<form asp-action="Excluir" asp-route-id="@Model.Id" method="post">
 
-    <p>Você deseja excluir o registro "@Model.Nome"? Não é possível reverter.
-    </p>
+    <p>Você realmente deseja excluir o registro abaixo?</p>
+
+    <div>
+        <label asp-for="Nome"></label>
+        <br />
+        <input asp-for="Nome" type="text" readonly>
+    </div>
 
     <button type="submit">Confirmar</button>
 
 </form>
 
 <p>
-    <a href="/Paciente/Listar">Voltar para a Lista</a>
+    <a asp-action="Listar">Voltar para a Lista</a>
 </p>

@@ -1,4 +1,4 @@
-@model List<Paciente>
+@model List<ListarPacienteViewModel>
 
 <h2>Controle de Medicamentos</h2>
 
@@ -24,19 +24,17 @@
         <th>Nome</th>
         <th>Telefone</th>
         <th>Cartão SUS</th>
-        <th>CPF</th>
         <th>Ações</th>
     </thead>
 
     <tbody>
-        @foreach (Paciente p in Model)
+        @foreach (ListarPacienteViewModel p in Model)
         {
             <tr>
                 <td>@p.Id</td>
                 <td>@p.Nome</td>
                 <td>@p.Telefone</td>
                 <td>@p.CartaoSus</td>
-                <td>@p.Cpf</td>
                 <td>
                     <a href="Editar/@p.Id">Editar</a>
                     <span> | <span>
