@@ -108,12 +108,9 @@ public sealed class FuncionarioController : Controller
     }
 
     [HttpPost]
-    [ActionName("Excluir")]
-    public ActionResult ConfirmarExclusao(int id)
+    public ActionResult Excluir(ExcluirFuncionarioViewModel excluirVm)
     {
-        Funcionario? funcionario = repositorioFuncionario.SelecionarPorId(id);
-
-        bool conseguiuExcluir = repositorioFuncionario.Excluir(id);
+        bool conseguiuExcluir = repositorioFuncionario.Excluir(excluirVm.Id);
 
         if (!conseguiuExcluir)
             return NotFound();
