@@ -41,9 +41,7 @@ public sealed class FuncionarioController : Controller
 
     public ActionResult Cadastrar()
     {
-        List<Funcionario> funcionarios = repositorioFuncionario.SelecionarTodos();
-
-        return View(funcionarios);
+        return View();
     }
 
     [HttpPost]
@@ -104,7 +102,12 @@ public sealed class FuncionarioController : Controller
         if (funcionario == null)
             return NotFound();
 
-        return View(funcionario);
+        ExcluirFuncionarioViewModel viewModel = new ExcluirFuncionarioViewModel(
+            id,
+            funcionario.Nome
+        );
+
+        return View(viewModel);
     }
 
     [HttpPost]

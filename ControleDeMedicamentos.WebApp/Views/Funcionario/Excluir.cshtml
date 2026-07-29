@@ -2,7 +2,14 @@
 
 <h2>Controle de Medicamentos</h2>
 
-<h1>Edição de Funcionários</h1>
+<hr />
+<a asp-controller="Home" asp-action="Index">Início</a> / @* Âncora ou Link *@
+<a asp-controller="Fornecedor" asp-action="Listar">Fornecedores</a> / @* Âncora ou Link *@
+<a asp-controller="Medicamento" asp-action="Listar">Medicamentos</a> / @* Âncora ou Link *@
+<a asp-controller="Funcionario" asp-action="Listar">Funcionários</a> / @* Âncora ou Link *@
+<hr />
+
+<h1>Exclusão de Funcionários</h1>
 
 <form asp-action="Excluir" asp-route-id="@Model.Id" method="post">
 
