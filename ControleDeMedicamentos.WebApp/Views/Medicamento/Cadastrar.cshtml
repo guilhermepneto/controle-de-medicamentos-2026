@@ -5,19 +5,18 @@
     ViewBag.Titulo = "Cadastro de Medicamentos";
 }
 
-
-<form action="/Medicamento/Cadastrar" method="post">
+<form action="/Medicamento/Cadastrar/@Model.Id" method="post">
 
     <div>
         <label for="nome">Nome</label>
         <br />
-        <input id="nome" name="Nome" type="text">
+        <input id="nome" name="Nome" type="text" value="@Model.Nome">
     </div>
 
     <div>
         <label for="descricao">Descrição</label>
         <br />
-        <textarea id="descricao" name="descricao"></textarea>
+        <textarea id="descricao" name="descricao">@Model.Descricao</textarea>
     </div>
 
     <div>
