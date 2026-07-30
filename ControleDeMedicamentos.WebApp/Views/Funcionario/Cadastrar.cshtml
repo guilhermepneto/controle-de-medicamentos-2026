@@ -1,15 +1,9 @@
 @model CadastrarFuncionarioViewModel;
 
-<h2>Controle de Medicamentos</h2>
-
-<hr />
-<a asp-controller="Home" asp-action="Index">Inicio</a> /
-<a asp-controller="Fornecedor" asp-action="Listar">Fornecedores</a> /
-<a asp-controller="Medicamento" asp-action="Listar">Medicamento</a> /
-<a asp-controller="Funcionario" asp-action="Listar">Funcionários</a> /
-<hr />
-
-<h1>Cadastro de Funcionários</h1>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Cadastro de Funcionarios";
+}
 
 <form asp-action="Cadastrar" method="post">
 

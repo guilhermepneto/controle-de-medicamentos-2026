@@ -1,14 +1,10 @@
 @model Medicamento;
 
-<h2>Controle de Medicamentos</h2>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Edição de Medicamentos";
+}
 
-<hr />
-<a href="/">Inicio</a> /
-<a href="/Fornecedor/Listar">Fornecedores</a> /
-<a href="/Medicamento/Listar">Medicamentos</a> /
-<hr />
-
-<h1>Edição de Medicamentos</h1>
 
 <form action="/Medicamento/Editar/@Model.Id" method="post">
 

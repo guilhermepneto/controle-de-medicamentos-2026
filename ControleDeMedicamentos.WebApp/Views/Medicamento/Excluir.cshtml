@@ -1,14 +1,10 @@
 @model Medicamento;
 
-<h2>Controle de Medicamentos</h2>
 
-<hr />
-<a href="/">Inicio</a> /
-<a href="/Fornecedor/Listar">Fornecedores</a> /
-<a href="/Medicamento/Listar">Medicamentos</a> /
-<hr />
-
-<h1>Exclusão de Medicamentos</h1>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Exclusão de Medicamentos";
+}
 
 <form action="/Medicamento/Excluir/@Model.Id" method="post">
 
