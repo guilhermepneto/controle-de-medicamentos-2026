@@ -5,30 +5,28 @@
     ViewBag.Titulo = "Cadastro de Fornecedores";
 }
 
-<form asp-action="Cadastrar" method="post">
+<div class="row justify-content-start">
+    <form class="col-6" action="/Fornecedor/Cadastrar" method="post">
 
-    <div>
-        <label asp-for="Nome"></label>
-        <br />
-        <input asp-for="Nome" type="text">
-    </div>
+        <div>
+            <label class="form-label" for="nome">Nome</label>
+            <input class="form-control" id="nome" name="nome" type="text">
+        </div>
 
-    <div>
-        <label asp-for="Telefone"></label>
-        <br />
-        <input asp-for="Telefone" type="text">
-    </div>
+        <div class="mt-4">
+            <label class="form-label" for="telefone">Telefone</label>
+            <input class="form-control" id="telefone" name="telefone" type="text">
+        </div>
 
-    <div>
-        <label asp-for="Cnpj">CNPJ</label>
-        <br />
-        <input asp-for="Cnpj" type="text">
-    </div>
+        <div class="mt-4">
+            <label class="form-label" for="cnpj">CNPJ</label>
+            <input class="form-control" id="cnpj" name="cnpj" type="text">
+        </div>
 
-    <button type="submit">Cadastrar</button>
+        <div class="d-flex gap-3 mt-4">
+            <button class="btn btn-primary" type="submit">Cadastrar</button>
+            <a class="btn btn-outline-secondary" href="/Fornecedor/Listar">Voltar para a lista</a>
+        </div>
+    </form>
+</div>
 
-</form>
-
-<p>
-    <a asp-action="Listar">Voltar para a Lista</a>
-</p>
