@@ -2,7 +2,7 @@ using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
 using ControleDeMedicamentos.WebApp.ModuloFuncionario;
 
 
-namespace ControleDeMedicamentos.WebApp.ModuloFuncionarios;
+namespace ControleDeMedicamentos.WebApp.ModuloFuncionario;
 
 public class RepositorioFuncionarioEmArquivo : RepositorioBaseEmArquivo<Funcionario>
 {

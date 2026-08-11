@@ -1,4 +1,4 @@
-@model List<Medicamento>
+@model List<ListarMedicamentoViewModel>
 
 @{
     Layout = "_Layout";
@@ -6,36 +6,57 @@
 }
 
 <p>
-    <a href="Cadastrar">Cadastrar Medicamento</a>
+    <a class="btn btn-primary" href="Cadastrar">Cadastrar medicamento
+        <i class="bi bi-building-add"></i>
+    </a>
 </p>
 
-<table>
-    <thead>
-        <tr>
-        </tr>
-        <th>Id</th>
-        <th>Nome</th>
-        <th>Descrição</th>
-        <th>Fornecedor</th>
-        <th>Quantidade em estoque</th>
-        <th>Ações</th>
-    </thead>
+@if (Model.Count == 0)
+{
+    <div class="alert alert-warning mt-4" role="alert">
+        Não há nenhum Medicamento registrado.
+    </div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3 mt-4">
 
-    <tbody>
-        @foreach (Medicamento m in Model)
+        @foreach (ListarMedicamentoViewModel m in Model)
         {
-            <tr>
-                <td>@m.Id</td>
-                <td>@m.Nome</td>
-                <td>@m.Descricao</td>
-                <td>@m.Fornecedor.Nome</td>
-                <th>@m.QuantidadeEmEstoque</th>
-                <td>
-                    <a href="Editar/@m.Id">Editar</a>
-                    <span> | <span>
-                        <a href="Excluir/@m.Id">Excluir</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5>@m.Nome</h5>
+                            <span class="badge text-bg-secondary">@m.Id</span>
+                        </div>
+
+                        <p class="card-text">@m.Descricao</p>
+
+
+                        <dl class="row mb-2">
+                            <dt class="col-sm-4">Fornecedor</dt>
+                            <dd class="col-sm-8">@m.NomeFornecedor</dd>
+                        </dl>
+
+                        <dl class="row mb-2">
+                            <dt class="col-sm-4">Estoque</dt>
+                            <dd class="col-sm-8">@m.QuantidadeemEstoque</dd>
+                        </dl>
+
+                        <div class="d-flex gap-2 justify-content-start">
+                            <a class="btn btn-sm btn-outline-primary" href="Editar/@f.Id">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+
+                            <a class="btn btn-sm btn-outline-danger" href="Excluir/@f.Id">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+}

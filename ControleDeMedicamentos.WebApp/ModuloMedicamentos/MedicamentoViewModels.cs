@@ -1,3 +1,8 @@
-//namespace ControleDeMedicamentos.WebApp.ModuloMedicamentos;
+namespace ControleDeMedicamentos.WebApp.ModuloMedicamentos;
 
-//public record ListarMedicamentoViewModel();
+public record ListarMedicamentoViewModel(
+    string Nome,
+    string Descricao,
+    string NomeFornecedor,
+    int
+);
