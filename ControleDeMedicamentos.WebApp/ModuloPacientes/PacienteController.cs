@@ -3,36 +3,33 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ControleDeMedicamentos.WebApp.ModuloPacientes;
 
-public sealed class PacienteController : Controller
+public class PacienteController : Controller
 {
-    private readonly RepositorioPacienteEmArquivo repositorioPaciente;
+    private readonly RepositorioPacienteEmArquivo repositorio;
 
     public PacienteController()
     {
-        ContextoJson contextoJson = new ContextoJson();
+        ContextoJson contexto = new ContextoJson();
+        contexto.Carregar();
 
-        contextoJson.Carregar();
-
-        repositorioPaciente = new RepositorioPacienteEmArquivo(contextoJson);
+        repositorio = new RepositorioPacienteEmArquivo(contexto);
     }
 
     [HttpGet]
     public ActionResult Listar()
     {
-        List<Paciente> pacientes = repositorioPaciente.SelecionarTodos();
+        List<ListarPacienteViewModel> viewModels = [];
 
-        List<ListarPacienteViewModel> viewModels = new List<ListarPacienteViewModel>();
-
-        foreach (Paciente p in pacientes)
+        foreach (Paciente p in repositorio.SelecionarTodos())
         {
-            ListarPacienteViewModel vm = new ListarPacienteViewModel(
+            ListarPacienteViewModel viewModel = new ListarPacienteViewModel(
                 p.Id,
                 p.Nome,
                 p.Telefone,
-                p.CartaoSus
+                p.CartaoSUS
             );
 
-            viewModels.Add(vm);
+            viewModels.Add(viewModel);
         }
 
         return View(viewModels);
@@ -41,55 +38,61 @@ public sealed class PacienteController : Controller
     [HttpGet]
     public ActionResult Cadastrar()
     {
-        return View();
-    }
-
-    [HttpPost]
-    public ActionResult Cadastrar(CadastrarPacienteViewModel cadastrarVm)
-    {
-        Paciente paciente = new Paciente(
-            cadastrarVm.Nome,
-            cadastrarVm.Telefone,
-            cadastrarVm.CartaoSus,
-            cadastrarVm.Cpf
-            );
-
-        repositorioPaciente.Cadastrar(paciente);
-
-        return RedirectToAction(nameof(Listar));
-
-    }
-
-    [HttpGet]
-    public ActionResult Editar(int id)
-    {
-        Paciente? paciente = repositorioPaciente.SelecionarPorId(id);
-
-        if (paciente == null)
-            return NotFound();
-
-        EditarPacienteViewModel viewModel = new EditarPacienteViewModel(
-          id,
-          paciente.Nome,
-          paciente.Telefone,
-          paciente.CartaoSus,
-          paciente.Cpf
+        CadastrarPacienteViewModel viewModel = new CadastrarPacienteViewModel(
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty
         );
 
         return View(viewModel);
     }
 
     [HttpPost]
-    public ActionResult Editar(EditarPacienteViewModel editarVm)
+    public ActionResult Cadastrar(CadastrarPacienteViewModel viewModel)
+    {
+        Paciente paciente = new Paciente(
+            viewModel.Nome,
+            viewModel.Telefone,
+            viewModel.CartaoSUS,
+            viewModel.Cpf
+        );
+
+        repositorio.Cadastrar(paciente);
+
+        return RedirectToAction(nameof(Listar));
+    }
+
+    [HttpGet]
+    public ActionResult Editar(int id)
+    {
+        Paciente? paciente = repositorio.SelecionarPorId(id);
+
+        if (paciente == null)
+            return NotFound();
+
+        EditarPacienteViewModel viewModel = new EditarPacienteViewModel(
+            id,
+            paciente.Nome,
+            paciente.Telefone,
+            paciente.CartaoSUS,
+            paciente.Cpf
+        );
+
+        return View(viewModel);
+    }
+
+    [HttpPost]
+    public ActionResult Editar(EditarPacienteViewModel viewModel)
     {
         Paciente pacienteAtualizado = new Paciente(
-            editarVm.Nome,
-            editarVm.Telefone,
-            editarVm.CartaoSus,
-            editarVm.Cpf
-            );
+            viewModel.Nome,
+            viewModel.Telefone,
+            viewModel.CartaoSUS,
+            viewModel.Cpf
+        );
 
-        bool conseguiuEditar = repositorioPaciente.Editar(editarVm.Id, pacienteAtualizado);
+        bool conseguiuEditar = repositorio.Editar(viewModel.Id, pacienteAtualizado);
 
         if (!conseguiuEditar)
             return NotFound();
@@ -100,7 +103,7 @@ public sealed class PacienteController : Controller
     [HttpGet]
     public ActionResult Excluir(int id)
     {
-        Paciente? paciente = repositorioPaciente.SelecionarPorId(id);
+        Paciente? paciente = repositorio.SelecionarPorId(id);
 
         if (paciente == null)
             return NotFound();
@@ -114,14 +117,14 @@ public sealed class PacienteController : Controller
     }
 
     [HttpPost]
-    public ActionResult Excluir(ExcluirPacienteViewModel excluirVm)
+    [ActionName("Excluir")]
+    public ActionResult ConfirmarExclusao(int id)
     {
-        bool conseguiuExcluir = repositorioPaciente.Excluir(excluirVm.Id);
+        bool conseguiuExcluir = repositorio.Excluir(id);
 
         if (!conseguiuExcluir)
             return NotFound();
 
         return RedirectToAction(nameof(Listar));
     }
-
 }
