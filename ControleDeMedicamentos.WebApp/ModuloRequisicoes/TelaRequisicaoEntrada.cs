@@ -52,38 +52,33 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaOpcoes, I
         if (deveExibirCabecalho)
         {
             Console.WriteLine("---------------------------------");
-            Console.Write("Pressione ENTER para continuar...");
+            Console.Write("Digite ENTER para continuar...");
             Console.ReadLine();
         }
     }
 
-    protected override RequisicaoEntrada ObterDadosCadastrais
+    protected override RequisicaoEntrada ObterDadosCadastrais()
     {
-        get
-        {
-            VisualizarMedicamentos();
+        VisualizarMedicamentos();
 
-            Console.WriteLine("---------------------------------");
+        Console.WriteLine("---------------------------------");
 
-            Console.Write("Digite o ID do medicamento que deseja requisitar: ");
-            int idMedicamento = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Digite o ID do medicamento que deseja requisitar: ");
+        int idMedicamento = Convert.ToInt32(Console.ReadLine());
+        Medicamento medicamento = repositorioMedicamento.SelecionarPorId(idMedicamento)!;
 
-            Medicamento medicamento = repositorioMedicamento.SelecionarPorId(idMedicamento)!;
+        Console.WriteLine("---------------------------------");
 
-            Console.Write("Digite a quantidade que deseja requisitar: ");
-            Console.WriteLine("---------------------------------");
-            Console.Write("Digite a quantidade do medicamento que deseja requisitar: ");
-            int quantidade = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Digite a quantidade do medicamento que deseja requisitar: ");
+        int quantidade = Convert.ToInt32(Console.ReadLine());
 
-            VisualizarFuncionarios();
+        VisualizarFuncionarios();
 
-            Console.Write("Digite o ID do funcionário requisitante: ");
-            int idFuncionario = Convert.ToInt32(Console.ReadLine());
-            Funcionario funcionario = repositorioFuncionario.SelecionarPorId(idFuncionario)!;
+        Console.Write("Digite o ID do funcionário requisitante: ");
+        int idFuncionario = Convert.ToInt32(Console.ReadLine());
+        Funcionario funcionario = repositorioFuncionario.SelecionarPorId(idFuncionario)!;
 
-            return new RequisicaoEntrada(medicamento, quantidade, funcionario);
-
-        }
+        return new RequisicaoEntrada(medicamento, quantidade, funcionario);
     }
 
     private void VisualizarMedicamentos()

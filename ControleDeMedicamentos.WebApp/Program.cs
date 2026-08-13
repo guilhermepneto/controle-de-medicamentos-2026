@@ -1,8 +1,12 @@
-﻿WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+﻿using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
+using ControleDeMedicamentos.WebApp.ModuloFornecedores;
+using ControleDeMedicamentos.WebApp.ModuloMedicamentos;
 
-builder.Services.AddSingleton();
-builder.Services.AddScoped();
-builder.Services.AddTransient();
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<ContextoJson>();
+builder.Services.AddScoped<RepositorioMedicamentoEmArquivo>();
+builder.Services.AddScoped<RepositorioFornecedorEmArquivo>();
 
 builder.Services.AddControllersWithViews();
 

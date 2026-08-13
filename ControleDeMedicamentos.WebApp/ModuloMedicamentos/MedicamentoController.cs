@@ -9,13 +9,14 @@ public sealed class MedicamentoController : Controller
     private readonly RepositorioMedicamentoEmArquivo repositorioMedicamento;
     private readonly RepositorioFornecedorEmArquivo repositorioFornecedor;
 
-    public MedicamentoController(
-        RepositorioMedicamentoEmArquivo repositorioMedicamento,
-        RepositorioFornecedorEmArquivo repositorioFornecedor
-        )
+    public MedicamentoController()
     {
-        this.repositorioMedicamento = repositorioMedicamento;
-        this.repositorioFornecedor = repositorioFornecedor;
+        ContextoJson contexto = new ContextoJson();
+
+        contexto.Carregar();
+
+        repositorioMedicamento = new RepositorioMedicamentoEmArquivo(contexto);
+        repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
     }
 
     [HttpGet]

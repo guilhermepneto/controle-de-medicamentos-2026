@@ -6,17 +6,17 @@ namespace ControleDeMedicamentos.WebApp.ModuloRequisicoes;
 
 public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaOpcoes, ITelaCrud
 {
-    private readonly RepositorioMedicamentoEmArquivo repositorioMedicamento;
     private readonly RepositorioPacienteEmArquivo repositorioPaciente;
+    private readonly RepositorioMedicamentoEmArquivo repositorioMedicamento;
 
     public TelaRequisicaoSaida(
         RepositorioRequisicaoSaidaEmArquivo repositorioRequisicao,
-        RepositorioMedicamentoEmArquivo repositorioMedicamento,
-        RepositorioPacienteEmArquivo repositorioPaciente
+        RepositorioPacienteEmArquivo repositorioPaciente,
+        RepositorioMedicamentoEmArquivo repositorioMedicamento
     ) : base("Requisição de Saída", repositorioRequisicao)
     {
-        this.repositorioMedicamento = repositorioMedicamento;
         this.repositorioPaciente = repositorioPaciente;
+        this.repositorioMedicamento = repositorioMedicamento;
     }
 
     public override void VisualizarTodos(bool deveExibirCabecalho)
@@ -29,66 +29,77 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaOpcoes, ITela
             Console.WriteLine("---------------------------------");
         }
 
-        Console.WriteLine(
-            "{0, -7} | {1, -20} | {2, -20} | {3, -10} | {4, -15}",
-            "Id", "Paciente", "Medicamento", "Qtd", "Data"
-        );
-
         List<RequisicaoSaida> registros = repositorio.SelecionarTodos();
 
         foreach (RequisicaoSaida r in registros)
         {
+            Console.WriteLine("Id: {0} | Paciente: {1} | Data: {2}",
+                r.Id, r.Paciente.Nome, r.Data.ToShortDateString());
+
             Console.WriteLine(
-                "{0, -7} | {1, -20} | {2, -20} | {3, -10} | {4, -15}",
-                r.Id,
-                r.Paciente.Nome,
-                r.Medicamento.Nome,
-                r.Quantidade,
-                r.Data.ToShortDateString()
+                "{0, -7} | {1, -20} | {2, -10}",
+                "Id", "Medicamento", "Qtd"
             );
+
+            foreach (MedicamentoPrescrito mp in r.MedicamentosPrescritos)
+            {
+                Console.WriteLine(
+                    "{0, -7} | {1, -20} | {2, -10}",
+                    mp.Medicamento.Id, mp.Medicamento.Nome, mp.Quantidade
+                );
+            }
+
+            Console.WriteLine("---------------------------------");
         }
 
         if (deveExibirCabecalho)
         {
-            Console.WriteLine("---------------------------------");
-            Console.Write("Pressione ENTER para continuar...");
+            Console.Write("Digite ENTER para continuar...");
             Console.ReadLine();
         }
     }
 
-    protected override RequisicaoSaida ObterDadosCadastrais
+    protected override RequisicaoSaida ObterDadosCadastrais()
     {
-        get
+        VisualizarPacientes();
+
+        Console.WriteLine("---------------------------------");
+
+        Console.Write("Digite o ID do paciente: ");
+        int idPaciente = Convert.ToInt32(Console.ReadLine());
+
+        Paciente paciente = repositorioPaciente.SelecionarPorId(idPaciente)!;
+
+        List<MedicamentoPrescrito> medicamentosPrescritos = [];
+
+        while (true)
         {
-            VisualizarPacientes();
-
-            Console.WriteLine("---------------------------------");
-            Console.Write("Digite o ID do paciente: ");
-            int idPaciente = Convert.ToInt32(Console.ReadLine());
-
-            Paciente paciente = repositorioPaciente.SelecionarPorId(idPaciente)!;
-
             VisualizarMedicamentos();
 
             Console.WriteLine("---------------------------------");
-            Console.Write("Digite o ID do medicamento que deseja requisitar: ");
+
+            Console.Write("Digite o ID do medicamento (0 para finalizar): ");
             int idMedicamento = Convert.ToInt32(Console.ReadLine());
+
+            if (idMedicamento == 0)
+                break;
 
             Medicamento medicamento = repositorioMedicamento.SelecionarPorId(idMedicamento)!;
 
-            Console.Write("Digite a quantidade que deseja requisitar: ");
+            Console.Write("Digite a quantidade: ");
             int quantidade = Convert.ToInt32(Console.ReadLine());
 
-
-            return new RequisicaoSaida(medicamento, quantidade, paciente);
+            medicamentosPrescritos.Add(new MedicamentoPrescrito(medicamento, quantidade));
         }
+
+        return new RequisicaoSaida(paciente, medicamentosPrescritos);
     }
 
     private void VisualizarPacientes()
     {
         Console.WriteLine(
-            "{0,-5} | {1,-30} | {2,-11}",
-            "Id", "Nome", "CPF"
+            "{0, -7} | {1, -30} | {2, -15} | {3, -17} | {4, -14}",
+            "Id", "Nome", "Telefone", "Cartão SUS", "CPF"
         );
 
         List<Paciente> registros = repositorioPaciente.SelecionarTodos();
@@ -96,17 +107,17 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaOpcoes, ITela
         foreach (Paciente p in registros)
         {
             Console.WriteLine(
-               "{0,-5} | {1,-30} | {2,-11}",
-               p.Id, p.Nome, p.Cpf
-           );
+                "{0, -7} | {1, -30} | {2, -15} | {3, -17} | {4, -14}",
+                p.Id, p.Nome, p.Telefone, p.CartaoSus, p.Cpf
+            );
         }
     }
 
     private void VisualizarMedicamentos()
     {
         Console.WriteLine(
-            "{0, -7} | {1, -20} | {2, -20} | {3, -20}",
-            "Id", "Nome", "Fornecedor", "Descrição"
+            "{0, -7} | {1, -20} | {2, -20} | {3, -20} | {4, -10}",
+            "Id", "Nome", "Fornecedor", "Descrição", "Estoque"
         );
 
         List<Medicamento> registros = repositorioMedicamento.SelecionarTodos();
@@ -114,9 +125,14 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaOpcoes, ITela
         foreach (Medicamento m in registros)
         {
             Console.WriteLine(
-                "{0, -7} | {1, -20} | {2, -20} | {3, -20}",
-                m.Id, m.Nome, m.Fornecedor.Nome, m.Descricao
+                "{0, -7} | {1, -20} | {2, -20} | {3, -20} | {4, -10}",
+                m.Id, m.Nome, m.Fornecedor.Nome, m.Descricao, m.QuantidadeEmEstoque
             );
         }
+    }
+
+    protected override bool ExistemDependenciasAtivasDoRegistro(int idRegistro)
+    {
+        return false;
     }
 }

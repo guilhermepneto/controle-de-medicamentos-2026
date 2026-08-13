@@ -1,3 +1,4 @@
+using ControleDeMedicamentos.WebApp.Compartilhado;
 using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
 
 namespace ControleDeMedicamentos.WebApp.ModuloRequisicoes;
