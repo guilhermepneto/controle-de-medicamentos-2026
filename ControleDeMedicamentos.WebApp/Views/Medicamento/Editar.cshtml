@@ -1,46 +1,42 @@
-@model Medicamento;
-
 @{
     Layout = "_Layout";
-    ViewBag.Titulo = "Edição de Medicamentos";
+    ViewBag.Titulo = "Edição de Medicamento";
 }
 
-<form action="/Medicamento/Editar/@Model.Id" method="post">
+@model EditarMedicamentoViewModel;
 
-    <div>
-        <label for="nome">Nome</label>
-        <br />
-        <input id="nome" name="Nome" type="text" value="@Model.Nome">
-    </div>
+<div class="row justify-content-start">
+    <form class="col-lg-6" asp-action="Editar" asp-route-id="@Model.Id" method="post">
 
-    <div>
-        <label for="descricao">Descrição</label>
-        <br />
-        <textarea id="descricao" name="descricao">@Model.Descricao</textarea>
-    </div>
+        <div>
+            <label class="form-label" asp-for="Nome">Nome</label>
+            <input class="form-control" asp-for="Nome" type="text">
+        </div>
 
-    <div>
-        <label for="fornecedorId">Fornecedor</label>
-        <br />
-        <select id="fornecedorId" name="fornecedorId">
-            @foreach (Fornecedor f in ViewBag.Fornecedores)
-            {
-                if (f.Id == Model.Fornecedor.Id)
-                {
-                    <option value="@f.Id" selected>@f.Nome</option>
-                }
-                else
+        <div class="mt-4">
+            <label class="form-label" asp-for="Descricao">Descrição</label>
+            <textarea class="form-control" asp-for="Descricao"></textarea>
+        </div>
+
+        <div class="mt-4">
+            <label class="form-label" asp-for="FornecedorId">Fornecedor</label>
+            <select class="form-select" asp-for="FornecedorId">
+                @foreach (FornecedorMedicamentoViewModel f in Model.Fornecedores)
                 {
                     <option value="@f.Id">@f.Nome</option>
                 }
-            }
-        </select>
-    </div>
+            </select>
+        </div>
 
-    <button type="submit">Confirmar</button>
-
-</form>
-
-<p>
-    <a href="/Medicamento/Listar">Voltar para a Lista</a>
-</p>
+        <div class="d-flex gap-3 mt-4">
+            <button class="btn btn-primary" type="submit">
+                <i class="bi bi-check"></i>
+                Confirmar edição
+            </button>
+            <a class="btn btn-outline-secondary" asp-action="Listar">
+                <i class="bi bi-arrow-return-left"></i>
+                Voltar para a lista
+            </a>
+        </div>
+    </form>
+</div>

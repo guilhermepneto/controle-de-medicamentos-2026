@@ -1,6 +1,6 @@
 using ControleDeMedicamentos.WebApp.Compartilhado.Arquivos;
 using ControleDeMedicamentos.WebApp.ModuloFornecedores;
-using ControleDeMedicamentos.WebApp.ModuloFuncionarios;
+using ControleDeMedicamentos.WebApp.ModuloFuncionario;
 using ControleDeMedicamentos.WebApp.ModuloMedicamentos;
 using ControleDeMedicamentos.WebApp.ModuloPacientes;
 using ControleDeMedicamentos.WebApp.ModuloRequisicoes;
@@ -27,7 +27,7 @@ public class TelaPrincipal
 
         telaFornecedor = new TelaFornecedor(repositorioFornecedor);
         telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
-        telaRequisicaoEntrada = new TelaRequisicaoEntrada(repositorioRequisicao, repositorioMedicamento);
+        telaRequisicaoEntrada = new TelaRequisicaoEntrada(repositorioRequisicao, repositorioMedicamento, repositorioFuncionario);
         telaRequisicaoSaida = new TelaRequisicaoSaida(repositorioRequisicaoSaida, repositorioMedicamento, repositorioPaciente);
         telaPaciente = new TelaPaciente(repositorioPaciente);
         telaFuncionario = new TelaFuncionario(repositorioFuncionario);
