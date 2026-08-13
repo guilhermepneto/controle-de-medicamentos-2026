@@ -8,9 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\RequisicaoEntrada\Cadastrar.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ModuloPacientes\" />
     <Folder Include="Views\Home\" />
     <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\RequisicaoEntrada\Cadastrar.cshtml" />
   </ItemGroup>
 
 </Project>

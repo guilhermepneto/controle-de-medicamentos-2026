@@ -26,7 +26,7 @@ public class PacienteController : Controller
                 p.Id,
                 p.Nome,
                 p.Telefone,
-                p.CartaoSUS
+                p.CartaoSus
             );
 
             viewModels.Add(viewModel);
@@ -75,7 +75,7 @@ public class PacienteController : Controller
             id,
             paciente.Nome,
             paciente.Telefone,
-            paciente.CartaoSUS,
+            paciente.CartaoSus,
             paciente.Cpf
         );
 
