@@ -1,5 +1,9 @@
 ﻿WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSingleton();
+builder.Services.AddScoped();
+builder.Services.AddTransient();
+
 builder.Services.AddControllersWithViews();
 
 WebApplication app = builder.Build();

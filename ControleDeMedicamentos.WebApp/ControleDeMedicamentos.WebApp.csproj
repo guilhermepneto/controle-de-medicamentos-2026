@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="ModuloPacientes\" />
-    <Folder Include="ModuloRequisicoes\RequisicaoSaida\" />
     <Folder Include="Views\Home\" />
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
