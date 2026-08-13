@@ -7,7 +7,14 @@ using ControleDeMedicamentos.WebApp.ModuloRequisicoes;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<ContextoJson>(ContextoJson.InjetarContexto);
+builder.Services.AddScoped(_ =>
+{
+    ContextoJson contexto = new ContextoJson();
+    contexto.Carregar();
+
+    return contexto;
+});
+
 builder.Services.AddScoped<RepositorioMedicamentoEmArquivo>();
 builder.Services.AddScoped<RepositorioFornecedorEmArquivo>();
 builder.Services.AddScoped<RepositorioFuncionarioEmArquivo>();
