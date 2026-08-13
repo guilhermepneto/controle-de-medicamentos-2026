@@ -2,23 +2,24 @@
 
 @{
     Layout = "_Layout";
-    ViewBag.Titulo = "Exclusão de Funcionarios";
+    ViewBag.Titulo = "Exclusão de Funcionário";
 }
 
-<form asp-action="Excluir" asp-route-id="@Model.Id" method="post">
+<div class="row justify-content-start">
+    <form class="col-lg-6" asp-action="Excluir" asp-route-id="@Model.Id" method="post">
+        <div class="alert alert-danger mt-4" role="alert">
+            Você deseja realmente excluir o registro "@Model.Nome"? Esta ação é irreversível.
+        </div>
 
-    <p>Você realmente deseja excluir o registro abaixo?</p>
-
-    <div>
-        <label asp-for="Nome"></label>
-        <br />
-        <input asp-for="Nome" type="text" readonly>
-    </div>
-
-    <button type="submit">Confirmar</button>
-
-</form>
-
-<p>
-    <a asp-action="Listar">Voltar para a Lista</a>
-</p>
+        <div class="d-flex gap-3 mt-4">
+            <button class="btn btn-danger" type="submit">
+                <i class="bi bi-check"></i>
+                Confirmar exclusão
+            </button>
+            <a class="btn btn-outline-secondary" asp-action="Listar">
+                <i class="bi bi-arrow-return-left"></i>
+                Voltar para a lista
+            </a>
+        </div>
+    </form>
+</div>
