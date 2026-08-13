@@ -7,9 +7,6 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="Views\RequisicaoEntrada\Cadastrar.cshtml" />
-  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ModuloPacientes\" />

@@ -7,13 +7,9 @@ public sealed class FornecedorController : Controller
 {
     private readonly RepositorioFornecedorEmArquivo repositorioFornecedor;
 
-    public FornecedorController()
+    public FornecedorController(RepositorioFornecedorEmArquivo repositorioFornecedor)
     {
-        ContextoJson contextoJson = new ContextoJson();
-
-        contextoJson.Carregar();
-
-        repositorioFornecedor = new RepositorioFornecedorEmArquivo(contextoJson);
+        this.repositorioFornecedor = repositorioFornecedor;
     }
 
     [HttpGet]

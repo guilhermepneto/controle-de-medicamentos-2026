@@ -8,14 +8,9 @@ public sealed class FuncionarioController : Controller
 {
     private readonly RepositorioFuncionarioEmArquivo repositorioFuncionario;
 
-    public FuncionarioController()
+    public FuncionarioController(RepositorioFuncionarioEmArquivo repositorioFuncionario)
     {
-        ContextoJson contextoJson = new ContextoJson();
-
-        contextoJson.Carregar();
-
-        repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextoJson);
-
+        this.repositorioFuncionario = repositorioFuncionario;
     }
 
     [HttpGet]
