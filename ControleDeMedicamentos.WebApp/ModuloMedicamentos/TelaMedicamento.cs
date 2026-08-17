@@ -48,29 +48,28 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaOpcoes, ITelaCrud
         }
     }
 
-    protected override Medicamento ObterDadosCadastrais
+    protected override Medicamento ObterDadosCadastrais()
     {
-        get
-        {
-            Console.Write("Digite o nome do medicamento: ");
-            string nome = Console.ReadLine() ?? string.Empty;
 
-            Console.Write("Digite a descrição do medicamento: ");
-            string descricao = Console.ReadLine() ?? string.Empty;
+        Console.Write("Digite o nome do medicamento: ");
+        string nome = Console.ReadLine() ?? string.Empty;
 
-            Console.WriteLine("---------------------------------");
+        Console.Write("Digite a descrição do medicamento: ");
+        string descricao = Console.ReadLine() ?? string.Empty;
 
-            VisualizarFornecedores();
+        Console.WriteLine("---------------------------------");
 
-            Console.WriteLine("---------------------------------");
+        VisualizarFornecedores();
 
-            Console.Write("Digite o ID do fornecedor que deseja selecionar: ");
-            int idFornecedor = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("---------------------------------");
 
-            Fornecedor fornecedor = repositorioFornecedor.SelecionarPorId(idFornecedor)!;
+        Console.Write("Digite o ID do fornecedor que deseja selecionar: ");
+        int idFornecedor = Convert.ToInt32(Console.ReadLine());
 
-            return new Medicamento(nome, descricao, fornecedor);
-        }
+        Fornecedor fornecedor = repositorioFornecedor.SelecionarPorId(idFornecedor)!;
+
+        return new Medicamento(nome, descricao, fornecedor);
+
     }
 
     private void VisualizarFornecedores()

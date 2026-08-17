@@ -1,4 +1,4 @@
-namespace ControleDeMedicamentos.WebApp.ModuloFuncionarios
+namespace ControleDeMedicamentos.WebApp.ModuloFuncionario
 {
     public record ListarFuncionarioViewModel(
         int Id,
