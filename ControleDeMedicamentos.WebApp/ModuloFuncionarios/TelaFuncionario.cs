@@ -43,21 +43,20 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaOpcoes, ITelaCrud
             Console.ReadLine();
         }
     }
-    protected override Funcionario ObterDadosCadastrais
+    protected override Funcionario ObterDadosCadastrais()
     {
-        get
-        {
-            Console.Write("Digite o nome do funcionário: ");
-            string nome = Console.ReadLine() ?? string.Empty;
 
-            Console.Write("Digite o telefone do funcionário: ");
-            string telefone = Console.ReadLine() ?? string.Empty;
+        Console.Write("Digite o nome do funcionário: ");
+        string nome = Console.ReadLine() ?? string.Empty;
 
-            Console.Write("Informe o CPF do funcionário: ");
-            string Cpf = Console.ReadLine() ?? string.Empty;
+        Console.Write("Digite o telefone do funcionário: ");
+        string telefone = Console.ReadLine() ?? string.Empty;
 
-            return new Funcionario(nome, telefone, Cpf);
-        }
+        Console.Write("Informe o CPF do funcionário: ");
+        string Cpf = Console.ReadLine() ?? string.Empty;
+
+        return new Funcionario(nome, telefone, Cpf);
+
     }
 
     protected override bool ExisteRegistroComInformacoesExclusivas(Funcionario entidade, int? idIgnorado = null)

@@ -37,7 +37,7 @@ public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
         Console.WriteLine($"Cadastro de {nomeEntidade}");
         Console.WriteLine("---------------------------------");
 
-        TEntidade novaEntidade = ObterDadosCadastrais;
+        TEntidade novaEntidade = ObterDadosCadastrais();
 
         List<string> erros = novaEntidade.Validar();
 
@@ -53,8 +53,6 @@ public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
             Console.WriteLine("Digite ENTER para continuar");
             Console.ReadLine();
 
-            // Recursão: Quando um método executa/chama o próprio método
-            // Stack Overflow: Quando a pilha de chamados (call stack) "transborda"
             Cadastrar();
             return;
         }
@@ -92,7 +90,7 @@ public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
 
         Console.WriteLine("---------------------------------");
 
-        TEntidade entidadeAtualizada = ObterDadosCadastrais;
+        TEntidade entidadeAtualizada = ObterDadosCadastrais();
 
         List<string> erros = entidadeAtualizada.Validar();
 
@@ -108,8 +106,6 @@ public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
             Console.WriteLine("Digite ENTER para continuar");
             Console.ReadLine();
 
-            // Recursão: Quando um método executa/chama o próprio método
-            // Stack Overflow: Quando a pilha de chamados (call stack) "transborda"
             Editar();
             return;
         }
@@ -163,7 +159,7 @@ public abstract class TelaBase<TEntidade> where TEntidade : EntidadeBase
 
     public abstract void VisualizarTodos(bool deveExibirCabecalho);
 
-    protected abstract TEntidade ObterDadosCadastrais { get; }
+    protected abstract TEntidade ObterDadosCadastrais();
 
     protected virtual bool ExisteRegistroComInformacoesExclusivas(TEntidade entidade, int? idIgnorado = null)
     {
