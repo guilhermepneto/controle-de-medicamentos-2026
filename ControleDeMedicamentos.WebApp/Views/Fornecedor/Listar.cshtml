@@ -6,8 +6,9 @@
 }
 
 <p>
-    <a class="btn btn-primary" href="Cadastrar">Cadastrar fornecedor
-        <i class="bi bi-building-add"></i>
+    <a class="btn btn-primary" asp-action="Cadastrar">
+        <i class="bi bi-patch-plus"></i>
+        Cadastrar fornecedor
     </a>
 </p>
 
@@ -20,7 +21,6 @@
 else
 {
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3 mt-4">
-
         @foreach (ListarFornecedorViewModel f in Model)
         {
             <div class="col">
@@ -34,26 +34,22 @@ else
                         <dl class="row mb-2">
                             <dt class="col-sm-4">Telefone</dt>
                             <dd class="col-sm-8">@f.Telefone</dd>
-                        </dl>
 
-                        <dl class="row mb-2">
                             <dt class="col-sm-4">CNPJ</dt>
                             <dd class="col-sm-8">@f.Cnpj</dd>
                         </dl>
 
-                        <div class="d-flex gap-2 justify-content-start">
-                            <a class="btn btn-sm btn-outline-primary" href="Editar/@f.Id">
-                                <i class="bi bi-pencil-square"></i>
+                        <div class="d-flex gap-2 justify-content-end mt-auto">
+                            <a class="btn btn-sm btn-outline-primary" title="Editar" asp-action="Editar" asp-route-id="@f.Id">
+                                <i class="bi bi-pencil"></i>
                             </a>
-
-                            <a class="btn btn-sm btn-outline-danger" href="Excluir/@f.Id">
-                                <i class="bi bi-trash"></i>
+                            <a class="btn btn-sm btn-outline-danger" title="Excluir" asp-action="Excluir" asp-route-id="@f.Id">
+                                <i class="bi bi-trash3"></i>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
         }
-
     </div>
 }
